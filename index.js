@@ -333,8 +333,8 @@ app.use(function (err, req, res, next) {
 });
 
 app.on("ready", () => {
-  app.listen(PORT, () => {
-    console.log(`Started! http://localhost:${PORT}`);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log("Started! http://0.0.0.0:${PORT}");
   });
 });
 
