@@ -445,7 +445,7 @@ app.use(errorHandler);
 
 app.on("ready", () => {
   app.listen(PORT, '0.0.0.0', () => {
-    console.log("Started! http://0.0.0.0:${PORT}");
+    console.log(`Started! http://0.0.0.0:${PORT}`);
   });
 });
 
