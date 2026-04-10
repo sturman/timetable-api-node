@@ -4,6 +4,7 @@ database/*
 # Git
 .git
 .gitignore
+.github
 
 # IDE
 .idea
@@ -13,13 +14,14 @@ database/*
 Dockerfile
 docker-compose.yml
 .dockerignore
-timetable-api-node-armv8.image
 
 # CI/CD and build scripts
 cloudbuild.yaml
 .gcloudignore
 build.sh
 process-profile.sh
+cleanup-revisions.sh
+Makefile
 
 # Documentation
 CLAUDE.md
@@ -30,6 +32,9 @@ README.md
 .env
 .env.*
 !.env.dist
+
+# Tests
+tests
 
 # Claude Code
 .claude
