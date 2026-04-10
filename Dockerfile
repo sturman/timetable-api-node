@@ -13,7 +13,7 @@ COPY package*.json ./
 # Install production dependencies.
 RUN npm install --only=production
 
-RUN apk add --no-cache tzdata
+RUN apk add --no-cache tzdata curl
 ENV TZ=Europe/Kyiv
 
 # Copy local code to the container image.
@@ -21,7 +21,7 @@ COPY . ./
 
 RUN echo "$CACHEBUST"
 
-RUN apk --no-cache add curl && curl --silent --head "https://track.ua-gis.com/gtfs/lviv/static.zip" | grep 'Last-Modified:' | cut -c 16- > ./last-modified.txt
+RUN curl --silent --head "https://track.ua-gis.com/gtfs/lviv/static.zip" | grep 'Last-Modified:' | cut -c 16- > ./last-modified.txt
 
 RUN node ./gtfs-import.js
 
