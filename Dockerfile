@@ -27,6 +27,8 @@ RUN node ./gtfs-import.js
 
 FROM node:24-alpine
 
+RUN apk add --no-cache tini
+
 WORKDIR /usr/src/app
 
 COPY . ./
@@ -37,4 +39,5 @@ COPY --from=build_image /usr/src/app/last-modified.txt ./last-modified.txt
 RUN node ./gtfs-import-slim.js
 
 # Run the web service on container startup.
-CMD [ "npm", "start" ]
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD [ "node", "index.js" ]
