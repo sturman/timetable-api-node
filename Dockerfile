@@ -38,6 +38,10 @@ COPY --from=build_image /usr/src/app/last-modified.txt ./last-modified.txt
 
 RUN node ./gtfs-import-slim.js
 
+RUN chown -R node:node /usr/src/app
+
+USER node
+
 # Run the web service on container startup.
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD [ "node", "index.js" ]
