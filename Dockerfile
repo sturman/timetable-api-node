@@ -25,6 +25,8 @@ RUN node ./gtfs-import.js
 
 FROM node:24-alpine
 
+RUN apk add --no-cache tini
+
 WORKDIR /usr/src/app
 
 COPY . ./
@@ -37,4 +39,5 @@ RUN node ./gtfs-import-slim.js
 HEALTHCHECK --interval=60s --timeout=15s --start-period=30s --retries=3 CMD wget -q --spider http://localhost:8080/health
 
 # Run the web service on container startup.
-CMD [ "npm", "start" ]
+ENTRYPOINT ["/sbin/tini", "--"]
+CMD [ "node", "index.js" ]
